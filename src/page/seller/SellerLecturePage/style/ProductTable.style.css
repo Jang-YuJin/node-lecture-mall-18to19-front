@@ -97,13 +97,6 @@
   gap: 6px;
 }
 
-/* 빈 상태 */
-.empty-state {
-  text-align: center;
-  padding: 40px;
-  color: #b2bec3;
-}
-
 /* 📱 모바일 대응 */
 @media (max-width: 768px) {
   .lecture-row {
