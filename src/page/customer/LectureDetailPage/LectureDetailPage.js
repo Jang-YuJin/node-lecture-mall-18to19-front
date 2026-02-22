@@ -18,6 +18,11 @@ const LectureDetail = () => {
   const [sizeError, setSizeError] = useState(false);
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+  const isDiscounted = selectedLecture?.dscnt;
+  const discountRate = Number(selectedLecture?.dscntRt);
+  const discountedPrice = Math.floor(
+    selectedLecture?.price * (1 - discountRate * 0.01)
+  );
 
   const addItemToCart = () => {
     //사이즈를 아직 선택안했다면 에러
@@ -57,8 +62,24 @@ const LectureDetail = () => {
         </Col>
         <Col className="product-info-area" sm={6}>
           <div className="product-title">{selectedLecture.name}</div>
-          <div className="product-price">
-            ₩ {currencyFormat(selectedLecture.price)}
+          <div className="price-section">
+            {isDiscounted ? (
+              <div className="price-row">
+                <span className="discount-badge-detail">
+                  🔥 {discountRate}% OFF
+                </span>
+                <span className="original-price">
+                  ₩ {currencyFormat(selectedLecture.price)}
+                </span>
+                <span className="discounted-price">
+                  ₩ {currencyFormat(discountedPrice)}
+                </span>
+              </div>
+            ) : (
+              <div className="normal-price">
+                ₩ {currencyFormat(selectedLecture.price)}
+              </div>
+            )}
           </div>
           <div className="product-desc">{selectedLecture.desc}</div>
 
